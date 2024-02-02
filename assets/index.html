@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Главная</title>
+
+	<!-- SWIPER -->
+<link href="css/swiper-bundle.min.css" rel="stylesheet">
+<!-- SELECT2 -->
+<link rel="stylesheet" href="css/select2.min.css">
+<!-- APP STYLES -->
+<link href="css/style.min.css" type="text/css" rel="stylesheet">
+</head>
+
+<body class="page-template-front-page">
+
+	<div class="marquee">
+  <div class="items-wrap">
+    <div class="items">
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+    </div>
+    <div aria-hidden="true" class="items">
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+    </div>
+  </div>  
+</div>
+	<!-------- header --------->
+<header class="header">
+  <div class="container">
+    <div class="header__container">
+      <a href="/" class="logo">
+        <svg width="78" height="44" viewBox="0 0 78 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_2019_12)">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.73522 22.0001C5.73522 30.7566 12.8338 37.8551 21.5903 37.8551C30.3468 37.8551 37.4453 30.7566 37.4453 22.0001C37.4453 13.2436 30.3468 6.14501 21.5903 6.14501C12.8338 6.14501 5.73522 13.2436 5.73522 22.0001ZM21.5903 0.859985C9.91493 0.859985 0.450195 10.3247 0.450195 22.0001C0.450195 33.6754 9.91493 43.1401 21.5903 43.1401C33.2656 43.1401 42.7304 33.6754 42.7304 22.0001C42.7304 10.3247 33.2656 0.859985 21.5903 0.859985ZM30.0457 31.5131H25.7605V23.8459H17.4187V31.5131H13.1336V12.4871H17.4187V20.0407H25.7605V12.4871H30.0457V31.5131ZM76.487 3.85999C77.4806 3.85999 77.9252 5.10653 77.156 5.73536L71.6166 10.2634C71.1446 10.6492 70.5538 10.86 69.9442 10.86H46.8023C46.11 8.31337 44.5595 6.08395 42.413 4.54867L41.4502 3.85999H76.487ZM70.1654 20.7342C70.9329 20.1046 70.4877 18.86 69.495 18.86H48.4502C49.1455 21.1415 49.1455 23.5785 48.4502 25.86H62.9717C63.5828 25.86 64.1751 25.6481 64.6476 25.2605L70.1654 20.7342ZM59.1519 32.86C60.1801 32.86 60.603 34.1794 59.7662 34.7771L54.7393 38.3678C54.2911 38.6879 53.7541 38.86 53.2034 38.86H41.4502L42.0945 38.3998C44.0812 36.9807 45.6677 35.0724 46.7002 32.86H59.1519Z" fill="currentColor"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_2019_12">
+          <rect width="78" height="44" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>          
+      </a>
+      <nav class="header__nav" id="burger-menu">
+        <div class="header__nav-head">
+          <a href="/" class="logo"><img src="/img/logo.svg" alt="logo"></a>
+          <button type="button" id="burger-close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3.98937 16.0104C3.40358 15.4246 3.40358 14.4749 3.98937 13.8891L13.8889 3.98961C14.4747 3.40383 15.4244 3.40383 16.0102 3.98961C16.596 4.5754 16.596 5.52515 16.0102 6.11093L6.11069 16.0104C5.5249 16.5962 4.57516 16.5962 3.98937 16.0104Z" fill="currentColor"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0097 16.0104C16.5954 15.4246 16.5954 14.4749 16.0097 13.8891L6.11016 3.98961C5.52437 3.40383 4.57462 3.40383 3.98884 3.98961C3.40305 4.5754 3.40305 5.52515 3.98884 6.11093L13.8883 16.0104C14.4741 16.5962 15.4239 16.5962 16.0097 16.0104Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <ul class="header__menu">
+          <li><a href="about-us.html">О нас</a></li>
+          <li><a href="catalog.html">Каталог</a></li>
+          <li><a href="archive-articles.html">Статьи</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+        <div class="header__bar">
+          <a href="tel:+971526289747" class="phone">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 3C2 2.73478 2.10536 2.48043 2.29289 2.29289C2.48043 2.10536 2.73478 2 3 2H5.153C5.38971 2.00011 5.6187 2.08418 5.79924 2.23726C5.97979 2.39034 6.10018 2.6025 6.139 2.836L6.879 7.271C6.91436 7.48222 6.88097 7.69921 6.78376 7.89003C6.68655 8.08085 6.53065 8.23543 6.339 8.331L4.791 9.104C5.34611 10.4797 6.17283 11.7293 7.22178 12.7782C8.27072 13.8272 9.52035 14.6539 10.896 15.209L11.67 13.661C11.7655 13.4695 11.9199 13.3138 12.1106 13.2166C12.3012 13.1194 12.5179 13.0859 12.729 13.121L17.164 13.861C17.3975 13.8998 17.6097 14.0202 17.7627 14.2008C17.9158 14.3813 17.9999 14.6103 18 14.847V17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18H15C7.82 18 2 12.18 2 5V3Z" fill="currentColor"/>
+            </svg>
+            <span>+971 52 628 97 47</span>
+          </a>
+          <ul class="langs">
+            <li class="wpml-ls-current-language"><a href="#"><span>Ru</span></a></li>
+            <li><a href="#"><span>En</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <button type="button" id="burger-open">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 5C1.5 4.17157 2.17157 3.5 3 3.5H17C17.8284 3.5 18.5 4.17157 18.5 5C18.5 5.82843 17.8284 6.5 17 6.5H3C2.17157 6.5 1.5 5.82843 1.5 5Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 10C1.5 9.17157 2.17157 8.5 3 8.5H17C17.8284 8.5 18.5 9.17157 18.5 10C18.5 10.8284 17.8284 11.5 17 11.5H3C2.17157 11.5 1.5 10.8284 1.5 10Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 15C1.5 14.1716 2.17157 13.5 3 13.5H17C17.8284 13.5 18.5 14.1716 18.5 15C18.5 15.8284 17.8284 16.5 17 16.5H3C2.17157 16.5 1.5 15.8284 1.5 15Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+	<main>
+
+		<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">Ваш надёжный способ купить автомобиль в&nbsp;ОАЭ без переплат, без необходимости торга, без&nbsp;дополнительных проверок авто</h1>
+    <div class="hero__benefits">
+      <div class="hero-benefit">
+        <h2><span>0%</span> рисков</h2>
+        <p>Все машины с оригинальным пробегом и БЕЗ аварий</p>
+      </div>
+      <div class="hero-benefit">
+        <h2><span>0%</span> скрытых платежей</h2>
+        <p>Все цены на сайте финальные и без скрытых платежей</p>
+      </div>
+      <div class="hero-benefit">
+        <h2><span>0%</span> предоплат</h2>
+        <p>Вы платите за автомобиль после доставки!</p>
+      </div>
+      <div class="hero-benefit">
+        <h2><span>100%</span> спокойствия</h2>
+        <p>Вы выбираете, а мы доставляем машину</p>
+      </div>
+    </div>
+    <div class="hero__search">
+      <h3 class="section-title">Поиск</h3>
+      <p>на данный момент <strong>2 459</strong> уникальных предложений</p>
+      <form action="#">
+        <div class="form-group">
+          <select id="select-marka" class="js-select2">
+            <option></option>
+            <option value="marka1">Марка 1</option>
+            <option value="marka2">Марка 2</option>
+            <option value="marka3">Марка 3</option>
+            <option value="marka4">Марка 4</option>
+            <option value="marka5">Марка 5</option>
+            <option value="marka6">Марка 6</option>
+            <option value="marka7">Марка 7</option>
+            <option value="marka8">Марка 8</option>
+            <option value="marka9">Марка 9</option>
+            <option value="marka10">Марка 10</option>
+            <option value="marka11">Марка 11</option>
+            <option value="marka12">Марка 12</option>
+            <option value="marka13">Марка 13</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select id="select-model" class="js-select2">
+            <option></option>
+            <option value="model1">Модель 1</option>
+            <option value="model2">Модель 2</option>
+            <option value="model3">Модель 3</option>
+            <option value="model4">Модель 4</option>
+            <option value="model5">Модель 5</option>
+          </select>
+        </div>
+        <div class="form-group form-group--split">
+          <input type="number" name="km_age-from" id="km_age-from" placeholder="Пробег от, км">
+          <input type="number" name="km_age-to" id="km_age-to" placeholder="до">
+        </div>
+        <div class="form-group form-group--split">
+          <input type="number" name="price-from" id="price-from" placeholder="Цена от, ₽">
+          <input type="number" name="price-to" id="price-to" placeholder="до">
+        </div>
+        <div class="form-group form-group--split">
+          <input type="number" name="year-from" id="year-from" placeholder="Год от">
+          <input type="number" name="year-to" id="year-to" placeholder="до">
+        </div>
+        <button type="submit"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.16618 1.66663C7.96816 1.66676 6.7876 1.95388 5.72333 2.50395C4.65906 3.05403 3.74205 3.85106 3.04907 4.82831C2.35608 5.80556 1.90729 6.93461 1.74025 8.12093C1.57321 9.30724 1.6928 10.5163 2.08899 11.6469C2.48519 12.7775 3.14646 13.7968 4.01746 14.6194C4.88846 15.4419 5.94383 16.0439 7.09524 16.3748C8.24664 16.7057 9.46058 16.756 10.6354 16.5215C11.8102 16.2869 12.9118 15.7743 13.8478 15.0266L16.9103 18.0891C17.0675 18.2409 17.278 18.3249 17.4965 18.323C17.715 18.3211 17.924 18.2335 18.0785 18.079C18.233 17.9245 18.3207 17.7155 18.3226 17.497C18.3245 17.2785 18.2405 17.068 18.0887 16.9108L15.0262 13.8483C15.9078 12.7448 16.46 11.4149 16.6191 10.0114C16.7782 8.60801 16.5378 7.18818 15.9255 5.91537C15.3132 4.64257 14.3539 3.56852 13.1581 2.81687C11.9623 2.06522 10.5786 1.6665 9.16618 1.66663ZM4.16618 9.16663C4.16618 8.51002 4.29551 7.85984 4.54678 7.25321C4.79806 6.64658 5.16635 6.09539 5.63065 5.63109C6.09494 5.1668 6.64614 4.7985 7.25276 4.54723C7.85939 4.29596 8.50957 4.16663 9.16618 4.16663C9.82279 4.16663 10.473 4.29596 11.0796 4.54723C11.6862 4.7985 12.2374 5.1668 12.7017 5.63109C13.166 6.09539 13.5343 6.64658 13.7856 7.25321C14.0369 7.85984 14.1662 8.51002 14.1662 9.16663C14.1662 10.4927 13.6394 11.7645 12.7017 12.7022C11.764 13.6398 10.4923 14.1666 9.16618 14.1666C7.8401 14.1666 6.56833 13.6398 5.63065 12.7022C4.69297 11.7645 4.16618 10.4927 4.16618 9.16663Z" fill="currentColor"/>
+          </svg><span>Поиск</span></button>
+      </form>
+    </div>
+  </div>
+  <div class="hero__bg" style=""></div>
+</section>
+		<section class="latesta">
+  <div class="container">
+    <div class="heading">
+      <h2 class="section-title">Последние поступления</h2>
+    </div>
+    <div class="latesta__cards">
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+      <div class="acard">
+  <!-- Swiper -->
+  <div class="swiper acardSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <a href="single.html" class="acard__content">
+    <h2 class="acard__title">Ford Bronco Sport</h2>
+    <div class="acard__price">
+      <div class="old">$160 000</div>
+      <div class="new">$130 000</div>
+    </div>
+    <div class="acard__chars">
+      <p>157 129 км</p>
+      <p>Автомат</p>
+      <p>1.6/128 л.с.</p>
+      <p>Передний привод</p>
+    </div>
+  </a>
+</div>
+    </div>
+  </div>
+</section>
+		<section class="seo-section">
+  <div class="container">
+    <div class="seo-section__block">
+      <h2>HonestCars.AE</h2>
+      <p>Единственный маркетплейс автомобилей в ОАЭ где собраны ТОЛЬКО машины с оригинальным пробегом и без единой аварии! Мы поставляем как новые автомобили так и с пробегом от официальных дилеров в других странах (Канада, Корея, Китай, Германия). HonestCars.Ae – абсолютно безрисковый способ купить идеальную машину по сниженной цене. Вы платите за автомобиль только после осмотра автомобиля – если в ней есть какой-либо недочет, то мы возвращаем задаток.</p>
+    </div>
+  </div>
+</section>
+
+	</main>
+
+	<!-------- footer --------->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__copyright">© 2023 — Copyright</div>
+  </div>
+</footer>
+
+	<!-- Script-->
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- Swiper JS -->
+<script src="js/swiper-bundle.min.js"></script>
+<!-- SELECT2 -->
+<script src="js/select2.min.js"></script>
+<!-- APP SCRIPTS -->
+<script src="js/app.min.js"></script>
+
+</body>
+
+</html>
