@@ -68,59 +68,27 @@ get_header(); ?>
 <section class="howprocess">
   <div class="container">
     <div class="howprocess__grid">
+      <?php if (get_field('process_title')) { ?>
       <div class="howprocess__heading">
-        <h2 class="section-title">Как происходит процесс покупки автомобиля</h2>
+        <h2 class="section-title"><?php the_field('process_title'); ?></h2>
       </div>
-      <div class="howprocess-item">
-        <div class="howprocess-item__content">
-          <div class="howprocess-item__title">
-            <span>01</span>
-            <h3>Выбор автомобиля</h3>
+      <?php } ?>
+      <?php if ( have_rows('process_cards') ): $count = 0; ?>
+        <?php while ( have_rows('process_cards') ) : the_row(); $count++; ?>
+          <div class="howprocess-item">
+            <div class="howprocess-item__content">
+              <div class="howprocess-item__title">
+                <span>0<?php echo $count; ?></span>
+                <h3><?php the_sub_field('process_card_title'); ?></h3>
+              </div>
+              <?php if (get_sub_field('process_card_text')) { ?>
+                <div class="howprocess-item__text"><?php the_sub_field('process_card_text'); ?></div>
+              <?php } ?>
+            </div>
+            <img src="<?php the_sub_field('process_card_image') ?>" class="howprocess-item__image" alt="image">
           </div>
-          <div class="howprocess-item__text">Вы выбираете автомобиль на сайте, либо, говорите свои пожелания нашему менеджеру</div>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/howprocess-01.jpg" class="howprocess-item__image" alt="image">
-      </div>
-      <div class="howprocess-item">
-        <div class="howprocess-item__content">
-          <div class="howprocess-item__title">
-            <span>02</span>
-            <h3>Оценка автомобиля</h3>
-          </div>
-          <div class="howprocess-item__text">Мы проводим оценку автомобиля в стране отправления для гарантии того, что авто в заводском состоянии. Если выясняются «нюансы», то мы о них сообщаем. Вы получаете видео и фото отчет</div>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/howprocess-02.jpg" class="howprocess-item__image" alt="image">
-      </div>
-      <div class="howprocess-item">
-        <div class="howprocess-item__content">
-          <div class="howprocess-item__title">
-            <span>03</span>
-            <h3>Решение о покупки</h3>
-          </div>
-          <div class="howprocess-item__text">Вы принимаете решение о покупке и мы заключаем договор. В договоре указывается предоплата - от 0%! Также фиксируется состояние автомобиля, конечная неизменная стоимость, сроки поставки</div>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/howprocess-03.jpg" class="howprocess-item__image" alt="image">
-      </div>
-      <div class="howprocess-item">
-        <div class="howprocess-item__content">
-          <div class="howprocess-item__title">
-            <span>04</span>
-            <h3>Растоможка</h3>
-          </div>
-          <div class="howprocess-item__text">Автомобиль приходит в ОАЭ примерно через 45 дней и проходит растоможку</div>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/howprocess-04.jpg" class="howprocess-item__image" alt="image">
-      </div>
-      <div class="howprocess-item">
-        <div class="howprocess-item__content">
-          <div class="howprocess-item__title">
-            <span>05</span>
-            <h3>Автомобиль ваш</h3>
-          </div>
-          <div class="howprocess-item__text">После осмотра автомобиля в RTA и если вы не видите никаких повреждений, вы доплачиваете оставшуюся часть суммы и автомобиль ваш!</div>
-        </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/howprocess-05.jpg" class="howprocess-item__image" alt="image">
-      </div>
+        <?php endwhile; ?>
+      <?php else : endif; ?>
     </div>
   </div>
 </section>
