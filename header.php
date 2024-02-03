@@ -10,25 +10,24 @@
 
 <body <?php echo body_class(); ?>>
 
-<div class="marquee">
-  <div class="items-wrap">
-    <div class="items">
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-    </div>
-    <div aria-hidden="true" class="items">
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-      <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-    </div>
-  </div>  
-</div>
-
 <!-------- header --------->
 <header class="header">
+  <div class="marquee">
+    <div class="items-wrap">
+      <div aria-hidden="true" class="items">
+        <div class="item"><span class="one"><?php echo __('Offer of the day:', 'freshauto'); ?></span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      </div>
+      <div aria-hidden="true" class="items">
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="header__container">
       <a href="<?php echo get_home_url(); ?>" class="logo">
@@ -53,12 +52,16 @@
             </svg>
           </button>
         </div>
-        <ul class="header__menu">
-          <li><a href="about-us.html">О нас</a></li>
-          <li><a href="catalog.html">Каталог</a></li>
-          <li><a href="archive-articles.html">Статьи</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
-        </ul>
+        <?php
+          wp_nav_menu([
+            'theme_location' => 'header',
+            'container' => '',
+            'menu_class' => 'header__menu',
+            'menu_id' => false,
+            'echo' => true,
+            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+          ]);
+        ?>
         <div class="header__bar">
           <a href="tel:+971526289747" class="phone">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,10 +69,16 @@
             </svg>
             <span>+971 52 628 97 47</span>
           </a>
-          <ul class="langs">
-            <li class="wpml-ls-current-language"><a href="#"><span>Ru</span></a></li>
-            <li><a href="#"><span>En</span></a></li>
-          </ul>
+          <?php
+          wp_nav_menu([
+            'theme_location' => 'lang',
+            'container' => '',
+            'menu_class' => 'langs',
+            'menu_id' => false,
+            'echo' => true,
+            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+          ]);
+          ?>
         </div>
       </nav>
       <button type="button" id="burger-open">

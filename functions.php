@@ -1,5 +1,8 @@
 <?php 
 
+require_once(__DIR__ . '/includes/wp_svg.php');
+require_once(__DIR__ . '/includes/wp_breadcrumbs.php');
+
 /**
  * ДОБАВЛЕНИЕ ВОЗМОЖНОСТЕЙ
  */
@@ -65,5 +68,24 @@ function delete_intermediate_image_sizes( $sizes ){
 	] );
 }
 
+
+/**
+  * Регистрирация областей меню
+  */
+  function freshauto_menus()
+  {
+    $locations = array(
+      'header' => 'Header Menu',
+      'lang' => 'Lang Menu'
+    );
+    register_nav_menus($locations);
+  }
+  add_action('init', 'freshauto_menus');
+
+
+
+@ini_set( 'upload_max_size' , '256M' );
+@ini_set( 'post_max_size', '256M');
+@ini_set( 'max_execution_time', '300' );
 
 ?>

@@ -9,7 +9,7 @@ get_header(); ?>
     <div class="whoarewe__wrapper">
       <div class="whoarewe__content">
         <?php if (get_field('whoarewe_title')) { ?><h1 class="section-title"><?php the_field('whoarewe_title'); ?></h1><?php } ?>
-        <?php if (get_field('whoarewe_content')) { ?><h1 class="section-title"><?php the_field('whoarewe_content'); ?></h1><?php } ?>
+        <?php if (get_field('whoarewe_content')) { ?><?php the_field('whoarewe_content'); ?><?php } ?>
       </div>
       <!-- Swiper -->
       <?php 
@@ -34,15 +34,16 @@ get_header(); ?>
   <div class="container">
     <div class="searchloc__wrapper">
       <div class="searchloc__content">
-        <h2 class="section-title">Места поиска</h2>
-        <p>Мы достигаем своих результатов за счет прямых поставок из ключевых стран с низкими ценами на премиум автомобили - Корея, Канада, Китай, Польша</p>
+        <?php if (get_field('searchloc_title')) { ?><h2 class="section-title"><?php the_field('searchloc_title'); ?></h2><?php } ?>
+        <?php if (get_field('searchloc_content')) { ?><p><?php the_field('searchloc_content'); ?></p><?php } ?>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/search-locations-icon.svg" class="searchloc__icon" alt="image">
       </div>
-      <div class="searchloc__image" style="background-image: url('..<?php echo get_template_directory_uri(); ?>/assets/img/search-locations-map.svg');"></div>
-      <div class="searchloc__image--mobile" style="background-image: url('..<?php echo get_template_directory_uri(); ?>/assets/img/search-locations-map--mobile.svg');"></div>
+      <div class="searchloc__image" style="background-image: url(<?php the_field('searchloc_map'); ?>);"></div>
+      <div class="searchloc__image--mobile" style="background-image: url(<?php the_field('searchloc_map_mobile'); ?>);"></div>
     </div>
   </div>
 </section>
+
 <section class="team">
   <div class="container">
     <div class="team__wrapper">
