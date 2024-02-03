@@ -1,28 +1,35 @@
-<?php get_header(); ?>
+<?php 
+/*
+Template Name: About us
+*/
+get_header(); ?>
 
 <section class="whoarewe">
   <div class="container">
     <div class="whoarewe__wrapper">
       <div class="whoarewe__content">
-        <h1 class="section-title">Кто мы?</h1>
-        <p>HonestCar.AE – это автомобильный маркетплейс нового поколения в ОАЭ. Наша цель – сделать процесс покупки и заказа автомобиля максимально честным, выгодным и приятным. Как мы этого достигаем?</p>
-        <p>Мы специализируемся на машинах заводского состояния – исключительно безаварийные, с низким оригинальным пробегом и преимущественно от официальных дилеров. Мы никогда не торгуемся и это плюс: вы знаете честную стоимость автомобиля без «накруток» рассчитанных на беспечного покупателя. На все поставляемые автомобили может быть дополнительно оформлена гарантия</p>
-        <p>При этом цены на наши автомобили на уровне или ниже рыночных</p>
+        <?php if (get_field('whoarewe_title')) { ?><h1 class="section-title"><?php the_field('whoarewe_title'); ?></h1><?php } ?>
+        <?php if (get_field('whoarewe_content')) { ?><h1 class="section-title"><?php the_field('whoarewe_content'); ?></h1><?php } ?>
       </div>
       <!-- Swiper -->
+      <?php 
+      $images = get_field('whoarewe_slider');
+      if ( $images ): ?>
       <div class="swiper whoareweSwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/whoarewe-slider-image.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/whoarewe-slider-image.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/whoarewe-slider-image.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/whoarewe-slider-image.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/whoarewe-slider-image.jpg" alt=""></div>
+              <?php foreach( $images as $image ): ?>
+                <div class="swiper-slide">
+                  <img src="<?php echo $image['url']; ?>" alt="image">
+                </div>
+              <?php endforeach; ?>
         </div>
         <div class="swiper-pagination"></div>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
+
 <section class="searchloc">
   <div class="container">
     <div class="searchloc__wrapper">
