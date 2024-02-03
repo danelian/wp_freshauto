@@ -48,33 +48,23 @@ get_header(); ?>
   <div class="container">
     <div class="team__wrapper">
       <div class="heading">
-        <h2 class="section-title">Наша команда</h2>
+        <?php if (get_field('team_title')) { ?><h2 class="section-title"><?php the_field('team_title'); ?></h2><?php } ?>
       </div>
-      <div class="team__cards">
-        <div class="tcard">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/team-01.jpg" alt="">
-          <h3>Имя Фамилия</h3>
-          <p>Должность</p>
+      <?php if ( have_rows('team_cards') ): ?>
+        <div class="team__cards">
+          <?php while ( have_rows('team_cards') ) : the_row(); ?>
+            <div class="tcard">
+            <img src="<?php the_sub_field('team_photo'); ?>" alt="<?php the_sub_field('team_name'); ?> photo">
+            <h3><?php the_sub_field('team_name'); ?></h3>
+            <p><?php the_sub_field('team_post'); ?></p>
+          </div>
+          <?php endwhile; ?>
         </div>
-        <div class="tcard">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/team-02.jpg" alt="">
-          <h3>Имя Фамилия</h3>
-          <p>Должность</p>
-        </div>
-        <div class="tcard">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/team-03.jpg" alt="">
-          <h3>Имя Фамилия</h3>
-          <p>Должность</p>
-        </div>
-        <div class="tcard">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/team-04.jpg" alt="">
-          <h3>Имя Фамилия</h3>
-          <p>Должность</p>
-        </div>
-      </div>
+      <?php else : endif; ?>
     </div>
   </div>
 </section>
+
 <section class="howprocess">
   <div class="container">
     <div class="howprocess__grid">
