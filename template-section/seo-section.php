@@ -1,12 +1,10 @@
+<?php if (get_field('about_title', 'options')) { ?>
 <section class="seo-section">
   <div class="container">
     <div class="seo-section__block">
-      <h2>HonestCars.AE</h2>
-      <p>Единственный маркетплейс автомобилей в ОАЭ где собраны ТОЛЬКО машины с оригинальным пробегом и без единой
-        аварии! Мы поставляем как новые автомобили так и с пробегом от официальных дилеров в других странах (Канада,
-        Корея, Китай, Германия). HonestCars.Ae – абсолютно безрисковый способ купить идеальную машину по сниженной цене.
-        Вы платите за автомобиль только после осмотра автомобиля – если в ней есть какой-либо недочет, то мы возвращаем
-        задаток.</p>
+      <h2><?php the_field('about_title', 'options'); ?></h2>
+      <?php if (get_field('about_content', 'options')) { the_field('about_content', 'options'); } ?>
     </div>
   </div>
 </section>
+<?php } ?>
