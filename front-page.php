@@ -24,8 +24,8 @@ get_header(); ?>
 </section>
 
 <div class="hero__search">
-  <h3 class="section-title">Поиск</h3>
-  <p>на данный момент <strong>2 459</strong> уникальных предложений</p>
+  <h3 class="section-title"><?php echo __('Search', 'freshauto'); ?></h3>
+  <p><?php echo __('for now', 'freshauto'); ?> <strong><?php the_field('unique_offers'); ?></strong> <?php echo __('unique offers', 'freshauto'); ?></p>
   <form action="#">
     <div class="form-group">
       <select id="select-marka" class="js-select2">
@@ -79,322 +79,26 @@ get_header(); ?>
 <section class="latesta">
   <div class="container">
     <div class="heading">
-      <h2 class="section-title">Последние поступления</h2>
+      <h2 class="section-title"><?php echo __('Latest arrivals', 'freshauto'); ?></h2>
     </div>
-    <div class="latesta__cards">
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
+    <?php
+    $args = array(
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'posts_per_page' => '12',
+      'order' => 'DESC',
+    );
+    $posts = new WP_Query($args);
+    ?>
+    <?php if ($posts->have_posts()): ?>
+      <div class="latesta__cards">
+        <?php while ($posts->have_posts()):
+          $posts->the_post(); ?>
+          <?php get_template_part('template-parts/acard'); ?>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
       </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-      <div class="acard">
-        <!-- Swiper -->
-        <div class="swiper acardSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/auto.jpg" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <a href="single.html" class="acard__content">
-          <h2 class="acard__title">Ford Bronco Sport</h2>
-          <div class="acard__price">
-            <div class="old">$160 000</div>
-            <div class="new">$130 000</div>
-          </div>
-          <div class="acard__chars">
-            <p>157 129 км</p>
-            <p>Автомат</p>
-            <p>1.6/128 л.с.</p>
-            <p>Передний привод</p>
-          </div>
-        </a>
-      </div>
-    </div>
+    <?php endif; ?>
   </div>
 </section>
 
