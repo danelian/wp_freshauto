@@ -8,6 +8,7 @@ require_once(__DIR__ . '/includes/wp_breadcrumbs.php');
  */
 if (!function_exists('freshauto_setup')) {
   function freshauto_setup() {
+    load_theme_textdomain( 'freshauto', get_template_directory() . '/languages' );
     // Добавляем динамический <title>
     add_theme_support('title-tag');
     // Добавление html5
@@ -178,6 +179,93 @@ function load_posts_by_ajax_callback() {
     wp_die();
 }
 
+
+function catalog_scripts() {
+  wp_register_script( 'custom-catalog-script', get_template_directory_uri() . '/assets/js/custom-catalog.js', array('jquery'), false, true );
+
+  $script_data_array = array(
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+      'security' => wp_create_nonce( 'load_more_posts' ),
+  );
+  wp_localize_script( 'custom-catalog-script', 'catalog', $script_data_array );
+
+  wp_enqueue_script( 'custom-catalog-script' );
+}
+add_action( 'wp_enqueue_scripts', 'catalog_scripts' );
+
+add_action('wp_ajax_load_posts_by_ajax', 'catalog_load_posts_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'catalog_load_posts_by_ajax_callback');
+
+function catalog_load_posts_by_ajax_callback() {
+    check_ajax_referer('load_more_posts', 'security');
+    $args = array(
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => '12',
+        'paged' => $_POST['page'],
+    );
+    $catalog_posts = new WP_Query( $args );
+    ?>
+ 
+    <?php if ( $catalog_posts->have_posts() ) : ?>
+        <?php while ( $catalog_posts->have_posts() ) : $catalog_posts->the_post(); ?>
+          <?php get_template_part('template-parts/acard'); ?>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
+    <?php
+    wp_die();
+}
+
+
+//
+
+function search_posts() {
+  $a_brand = $_POST['a_brand'];
+  // $price = $_POST['price'];
+  
+  $args = array(
+    'post_type' => 'post',
+    'posts_per_page' => -1,
+    'meta_query' => array(
+      'relation' => 'AND',
+      array(
+        'key' => 'a_brand',
+        'value' => $a_brand,
+        'compare' => '=',
+      ),
+      // array(
+      //   'key' => 'price',
+      //   'value' => $price,
+      //   'compare' => '<=',
+      //   'type' => 'NUMERIC',
+      // ),
+    ),
+  );
+  
+  $query = new WP_Query($args);
+  
+  // Обработка результатов и возврат JSON
+  $results = array();
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      $results[] = array(
+        'title' => get_the_title(),
+        'permalink' => get_permalink(),
+        // Другие поля поста, которые вам нужны
+      );
+    }
+  }
+  
+  wp_reset_postdata();
+  
+  wp_send_json($results);
+}
+add_action('wp_ajax_search_posts', 'search_posts');
+add_action('wp_ajax_nopriv_search_posts', 'search_posts');
+
+///////////////////////////////
 
 
 

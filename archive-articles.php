@@ -26,7 +26,7 @@
         <?php wp_reset_postdata(); ?>
       </div>
       <div class="pagination__wrapper">
-        <div class="button-second loadmore">
+        <div class="button-second loadmore" id="loadmore-blog">
           <?php echo __('Show more', 'freshauto'); ?>
         </div>
         <nav class="navigation pagination" aria-label="Записи">

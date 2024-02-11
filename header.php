@@ -11,7 +11,7 @@
 <body <?php echo body_class(); ?>>
 
 <!-------- header --------->
-<header class="header">
+<header class="header" id="header">
   <div class="marquee">
     <div class="items-wrap">
       <div aria-hidden="true" class="items">

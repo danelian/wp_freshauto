@@ -1,5 +1,28 @@
 <?php get_header(); ?>
 
+<!-- vars -->
+<?php
+$a_gallery = get_field('a_gallery');
+// Characteristics
+$a_status = get_field('a_status');
+$a_model_year = get_field('a_model_year');
+$a_mileage = get_field('a_mileage');
+$a_country = get_field('a_country');
+$a_color = get_field('a_color');
+$a_engine = get_field('a_engine');
+$a_unit = get_field('a_unit');
+$a_state = get_field('a_state');
+$a_equipment = get_field('a_equipment');
+// Price
+$a_old_price = get_field('a_old_price');
+$a_new_price = get_field('a_new_price');
+// Text info
+$a_info = get_field('a_info');
+// We recomend
+$a_recomend = get_field('a_recomend');
+$a_recomend_post = get_sub_field('a_recomend_post')
+?>
+
 <div class="product">
   <div class="container">
     <div class="product__container">
@@ -81,21 +104,21 @@
         </div>
       </div>
       <div class="product__content">
-        <h1 class="product__title">Ford Bronco Sport</h1>
+        <h1 class="product__title"><?php the_title(); ?></h1>
         <div class="product__chars">
-          <p class="char"><span>Статус</span> В наличии</p>
-          <p class="char"><span>Привод</span> Полный</p>
-          <p class="char"><span>Модельный год</span> 2008</p>
-          <p class="char"><span>Состояние</span> Не требует ремонта</p>
-          <p class="char"><span>Пробег</span> 200 000 км</p>
-          <p class="char"><span>Комплектация</span> Trim</p>
-          <p class="char"><span>Страна экспорта</span> ОАЭ</p>
-          <p class="char"><span>Цвет</span> Серый</p>
-          <p class="char"><span>Двигатель</span> 1.6 л / 80 л.с.</p>
+          <?php if ($a_status) { ?><p class="char"><span><?php echo __('Status', 'freshauto'); ?></span> <?php echo $a_status; ?></p><?php } ?>
+          <?php if ($a_unit) { ?><p class="char"><span><?php echo __('Drive unit', 'freshauto'); ?></span> <?php echo $a_unit; ?></p><?php } ?>
+          <?php if ($a_model_year) { ?><p class="char"><span><?php echo __('Model year', 'freshauto'); ?></span> <?php echo $a_model_year; ?></p><?php } ?>
+          <?php if ($a_state) { ?><p class="char"><span><?php echo __('State', 'freshauto'); ?></span> <?php echo $a_state; ?></p><?php } ?>
+          <?php if ($a_mileage) { ?><p class="char"><span><?php echo __('Mileage', 'freshauto'); ?></span> <?php echo $a_mileage; ?></p><?php } ?>
+          <?php if ($a_equipment) { ?><p class="char"><span><?php echo __('Equipment', 'freshauto'); ?></span> <?php echo $a_equipment; ?></p><?php } ?>
+          <?php if ($a_country) { ?><p class="char"><span><?php echo __('Country of export', 'freshauto'); ?></span> <?php echo $a_country; ?></p><?php } ?>
+          <?php if ($a_color) { ?><p class="char"><span><?php echo __('Color', 'freshauto'); ?></span> <?php echo $a_color; ?></p><?php } ?>
+          <?php if ($a_engine) { ?><p class="char"><span><?php echo __('Engine', 'freshauto') ?></span> <?php echo $a_engine; ?></p><?php } ?>
         </div>
         <div class="product__price">
-          <div class="old">$160 000</div>
-          <div class="new">$130 000</div>
+          <?php if ($a_old_price) { ?><div class="old"><?php echo $a_old_price; ?></div><?php } ?>
+          <?php if ($a_new_price) { ?><div class="new"><?php echo $a_new_price; ?></div><?php } ?>
         </div>
         <div class="product__nav">
           <a href="#" class="button-primary">Заказать</a>
@@ -103,20 +126,10 @@
         </div>
       </div>
     </div>
-    <div class="product__about">
-      <h2>Текстовое описание</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </div>
+    <?php if ($a_info) { ?><div class="product__about"><?php echo $a_info; ?></div><?php } ?>
     <div class="product__recom">
       <div class="heading">
-        <h2 class="section-title">Рекомендуем</h2>
+        <h2 class="section-title"><?php echo __('We recomend', 'freshauto'); ?></h2>
       </div>
       <div class="latesta__cards">
         <div class="acard">

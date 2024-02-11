@@ -1,6 +1,6 @@
 var page = 2
 jQuery(function ($) {
-  $('body').on('click', '.loadmore', function () {
+  $('body').on('click', '#loadmore-blog', function () {
     var data = {
       action: 'load_posts_by_ajax',
       page: page,
@@ -12,7 +12,7 @@ jQuery(function ($) {
         $('.blog-posts').append(response)
         page++
       } else {
-        $('.loadmore').hide()
+        $('#loadmore-blog').hide()
       }
     })
   })
