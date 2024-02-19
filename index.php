@@ -1,4 +1,70 @@
-<?php get_header(); ?>
+<?php 
+/**
+ * 
+ * 
+ * 
+ * 
+ */
+
+$brands_list      = [];   
+$model_list       = []; 
+
+$args = array(
+    'post_type'         => 'post'
+);
+
+$the_query = new WP_Query( $args );
+
+if( $the_query->have_posts() ):
+
+  while( $the_query->have_posts() ) : $the_query->the_post();
+
+    if ( get_field('a_brand') ) :
+
+      $brands_list[]    = get_field('a_brand');
+      $model_list[]     = get_field('a_model');
+
+    endif; 
+
+  endwhile;
+
+endif;
+
+wp_reset_query();
+
+/**
+ * 
+ * 
+ * 
+ */ 
+
+$brands_list     = array_unique( $brands_list );
+$model_list      = array_unique( $model_list );
+
+/**
+ * 
+ * 
+ * 
+ */ 
+
+$brand_start     = $_GET['marka'];
+$model_start     = $_GET['model'];
+$km_age_from     = $_GET['km_age-from'];
+$km_age_to       = $_GET['km_age-to'];
+$price_from      = $_GET['price-from'];
+$price_to        = $_GET['price-to'];
+$year_from       = $_GET['year-from'];
+$year_to         = $_GET['year-to'];
+
+/**
+ * 
+ * 
+ * 
+ * 
+ */ 
+
+
+get_header(); ?>
 
 <div class="catalog">
   <div class="container">
@@ -11,48 +77,62 @@
           <h2 class="section-title"><?php echo __('Filter', 'freshauto'); ?></h2>
         </div>
         <div class="catalog__left-content">
-          <form action="#">
+          <form id="global-filter-section" data-url="<?= get_site_url(); ?>">
             <div class="form-group">
+
               <select id="select-marka" class="js-select2">
+
                 <option></option>
-                <option value="marka1">Марка 1</option>
-                <option value="marka2">Марка 2</option>
-                <option value="marka3">Марка 3</option>
-                <option value="marka4">Марка 4</option>
-                <option value="marka5">Марка 5</option>
-                <option value="marka6">Марка 6</option>
-                <option value="marka7">Марка 7</option>
-                <option value="marka8">Марка 8</option>
-                <option value="marka9">Марка 9</option>
-                <option value="marka10">Марка 10</option>
-                <option value="marka11">Марка 11</option>
-                <option value="marka12">Марка 12</option>
-                <option value="marka13">Марка 13</option>
+                <option value="default"><?php echo __('Select', 'freshauto'); ?></option>
+
+                <?php 
+                foreach ( $brands_list as $brand ) : 
+                $selected = ( $brand_start == $brand ) ? 'selected' : ''; 
+                ?>
+
+                <option value="<?= $brand; ?>" <?= $selected; ?>><?= $brand; ?></option>  
+
+                <?php 
+                endforeach; 
+                ?>
+
               </select>
+
             </div>
+
             <div class="form-group">
+
               <select id="select-model" class="js-select2">
+
                 <option></option>
-                <option value="model1">Модель 1</option>
-                <option value="model2">Модель 2</option>
-                <option value="model3">Модель 3</option>
-                <option value="model4">Модель 4</option>
-                <option value="model5">Модель 5</option>
+                <option value="default"><?php echo __('Select', 'freshauto'); ?></option>
+
+                <?php 
+                  foreach ( $model_list as $model ) : 
+                  $selected = ( $model_start == $model ) ? 'selected' : ''; 
+                ?>
+
+                <option value="<?= $model; ?>" <?= $selected; ?>><?= $model; ?></option>
+
+                <?php endforeach; ?>
+
               </select>
+
+            </div>
+
+            <div class="form-group form-group--split">
+              <input type="number" name="km_age-from" id="km_age-from" placeholder="<?php echo __('Mileage from, km', 'freshauto'); ?>" value="<?= $km_age_from; ?>">
+              <input type="number" name="km_age-to" id="km_age-to" placeholder="<?php echo __('to', 'freshauto'); ?>" value="<?= $km_age_to; ?>">
             </div>
             <div class="form-group form-group--split">
-              <input type="number" name="km_age-from" id="km_age-from" placeholder="Пробег от, км">
-              <input type="number" name="km_age-to" id="km_age-to" placeholder="до">
+              <input type="number" name="price-from" id="price-from" placeholder="<?php echo __('Price from, ₽', 'freshauto'); ?>"  value="<?= $price_from; ?>">
+              <input type="number" name="price-to" id="price-to" placeholder="<?php echo __('to', 'freshauto'); ?>" value="<?= $price_to; ?>">
             </div>
             <div class="form-group form-group--split">
-              <input type="number" name="price-from" id="price-from" placeholder="Цена от, ₽">
-              <input type="number" name="price-to" id="price-to" placeholder="до">
+              <input type="number" name="year-from" id="year-from" placeholder="<?php echo __('A year from', 'freshauto'); ?>" value="<?= $year_from; ?>">
+              <input type="number" name="year-to" id="year-to" placeholder="<?php echo __('to', 'freshauto'); ?>" value="<?= $year_to; ?>">
             </div>
-            <div class="form-group form-group--split">
-              <input type="number" name="year-from" id="year-from" placeholder="Год от">
-              <input type="number" name="year-to" id="year-to" placeholder="до">
-            </div>
-            <button class="button-reset"><?php echo __('Reset', 'freshauto'); ?></button>
+            <button class="button-reset" id="button_reset_form"><?php echo __('Reset', 'freshauto'); ?></button>
           </form>
         </div>
       </div>
@@ -61,11 +141,11 @@
           <h2 class="section-title"><?php echo __('All models', 'freshauto'); ?></h2>
           <select id="select-orderby" class="js-select2">
             <option></option>
-            <option value="orderby1">Сначала недорогие</option>
-            <option value="orderby2">Сначала дорогие</option>
-            <option value="orderby3">Сначала новые</option>
-            <option value="orderby4">Сначала старые</option>
-            <option value="orderby5">Маленький пробег</option>
+            <option value="orderby1"><?php echo __('Inexpensive first', 'freshauto'); ?></option>
+            <option value="orderby2"><?php echo __('Dear ones first', 'freshauto'); ?></option>
+            <option value="orderby3"><?php echo __('New ones first', 'freshauto'); ?></option>
+            <option value="orderby4"><?php echo __('Old ones first', 'freshauto'); ?></option>
+            <option value="orderby5"><?php echo __('Low mileage', 'freshauto'); ?></option>
           </select>
         </div>
         <?php
@@ -73,34 +153,24 @@
         $args = array(
           'post_type' => 'post',
           'post_status' => 'publish',
-          'posts_per_page' => '12',
+          'posts_per_page' => '-1',
           'paged' => $paged,
         );
         $catalog_posts = new WP_Query($args);
         ?>
         <?php if ($catalog_posts->have_posts()): ?>
-          <div class="catalog__cards catalog-posts">
+          <div class="catalog__cards catalog-posts latesta-cards" id="latesta-cards">
             <?php while ($catalog_posts->have_posts()):
               $catalog_posts->the_post(); ?>
               <?php get_template_part('template-parts/acard'); ?>
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
           </div>
-          <div class="pagination__wrapper">
+          <!--div class="pagination__wrapper">
             <div class="button-second" id="loadmore-catalog">
               <?php echo __('Show more', 'freshauto'); ?>
             </div>
-            <nav class="navigation pagination" aria-label="Записи">
-              <?php echo paginate_links(
-                array(
-                  'total' => $catalog_posts->max_num_pages,
-                  'current' => $paged,
-                  'prev_text' => '<svg width="5" height="7" viewBox="0 0 5 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.84033 0.109523C5.05323 0.255201 5.05323 0.491392 4.84033 0.63707L1.25 3.09378C1.0371 3.23946 1.0371 3.47565 1.25 3.62133L4.84032 6.07804C5.05322 6.22372 5.05322 6.45991 4.84032 6.60559C4.62743 6.75126 4.28225 6.75126 4.06935 6.60559L0.479023 4.14887C-0.159674 3.71184 -0.159675 3.00327 0.479023 2.56623L4.06935 0.109523C4.28225 -0.0361548 4.62743 -0.0361548 4.84033 0.109523Z" fill="#1C1C1C" fill-opacity="0.2" /><path fill-rule="evenodd" clip-rule="evenodd" d="M4.84033 0.109523C5.05323 0.255201 5.05323 0.491392 4.84033 0.63707L1.25 3.09378C1.0371 3.23946 1.0371 3.47565 1.25 3.62133L4.84032 6.07804C5.05322 6.22372 5.05322 6.45991 4.84032 6.60559C4.62743 6.75126 4.28225 6.75126 4.06935 6.60559L0.479023 4.14887C-0.159674 3.71184 -0.159675 3.00327 0.479023 2.56623L4.06935 0.109523C4.28225 -0.0361548 4.62743 -0.0361548 4.84033 0.109523Z" fill="white" /></svg>',
-                  'next_text' => '<svg width="5" height="7" viewBox="0 0 5 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.159674 0.109523C-0.053226 0.255201 -0.0532259 0.491392 0.159674 0.63707L3.75 3.09378C3.9629 3.23946 3.9629 3.47565 3.75 3.62133L0.159675 6.07804C-0.0532243 6.22372 -0.0532242 6.45991 0.159675 6.60559C0.372575 6.75126 0.717753 6.75126 0.930652 6.60559L4.52098 4.14887C5.15967 3.71184 5.15968 3.00327 4.52098 2.56623L0.93065 0.109523C0.717751 -0.0361553 0.372573 -0.0361552 0.159674 0.109523Z" fill="#1C1C1C" fill-opacity="0.2" /><path fill-rule="evenodd" clip-rule="evenodd" d="M0.159674 0.109523C-0.053226 0.255201 -0.0532259 0.491392 0.159674 0.63707L3.75 3.09378C3.9629 3.23946 3.9629 3.47565 3.75 3.62133L0.159675 6.07804C-0.0532243 6.22372 -0.0532242 6.45991 0.159675 6.60559C0.372575 6.75126 0.717753 6.75126 0.930652 6.60559L4.52098 4.14887C5.15967 3.71184 5.15968 3.00327 4.52098 2.56623L0.93065 0.109523C0.717751 -0.0361553 0.372573 -0.0361552 0.159674 0.109523Z" fill="white" /></svg>'
-                ));
-              ?>
-            </nav>
-          </div>
+          </div-->
         <?php endif; ?>
       </div>
     </div>
@@ -108,5 +178,54 @@
 </div>
 
 <?php get_template_part('template-section/seo-section'); ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.innerWidth >= 1025) {
+    (function () {
+      var a = document.querySelector('#styckiBlock'), b = null, P = 0;  // если ноль заменить на число, то блок будет прилипать до того, как верхний край окна браузера дойдёт до верхнего края элемента. Может быть отрицательным числом
+      window.addEventListener('scroll', Ascroll, false);
+      document.body.addEventListener('scroll', Ascroll, false);
+      function Ascroll() {
+        if (b == null) {
+          var Sa = getComputedStyle(a, ''), s = '';
+          for (var i = 0; i < Sa.length; i++) {
+            if (Sa[i].indexOf('overflow') == 0 || Sa[i].indexOf('padding') == 0 || Sa[i].indexOf('border') == 0 || Sa[i].indexOf('outline') == 0 || Sa[i].indexOf('box-shadow') == 0 || Sa[i].indexOf('background') == 0) {
+              s += Sa[i] + ': ' + Sa.getPropertyValue(Sa[i]) + '; '
+            }
+          }
+          b = document.createElement('div');
+          b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';
+          a.insertBefore(b, a.firstChild);
+          var l = a.childNodes.length;
+          for (var i = 1; i < l; i++) {
+            b.appendChild(a.childNodes[1]);
+          }
+          a.style.height = b.getBoundingClientRect().height + 'px';
+          a.style.padding = '0';
+          a.style.border = '0';
+        }
+        var Ra = a.getBoundingClientRect(),
+          R = Math.round(Ra.top + b.getBoundingClientRect().height - document.querySelector('.seo-section').getBoundingClientRect().top + 0);  // селектор блока, при достижении верхнего края которого нужно открепить прилипающий элемент;  Math.round() только для IE; если ноль заменить на число, то блок будет прилипать до того, как нижний край элемента дойдёт до футера
+        if ((Ra.top - P) <= 0) {
+          if ((Ra.top - P) <= R) {
+            b.className = 'stop';
+            b.style.top = - R + 'px';
+          } else {
+            b.className = 'sticky';
+            b.style.top = P + 'px';
+          }
+        } else {
+          b.className = '';
+          b.style.top = '';
+        }
+        window.addEventListener('resize', function () {
+          a.children[0].style.width = getComputedStyle(a, '').width
+        }, false);
+      }
+    })()
+  }
+})
+</script>
 
 <?php get_footer(); ?>

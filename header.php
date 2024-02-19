@@ -6,28 +6,39 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   <?php wp_head(); ?>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
 </head>
 
 <body <?php echo body_class(); ?>>
 
 <!-------- header --------->
 <header class="header" id="header">
+  <?php if ( have_rows('marquee', 'options') ): ?>
   <div class="marquee">
     <div class="items-wrap">
       <div aria-hidden="true" class="items">
-        <div class="item"><span class="one"><?php echo __('Offer of the day:', 'freshauto'); ?></span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <?php while ( have_rows('marquee', 'options') ) : the_row(); ?>
+          <div class="item">
+            <span class="one"><?php echo __('Offer of the day:', 'freshauto'); ?></span>
+            <?php if (get_sub_field('marquee_auto', 'options')) { ?><a href="<?php the_sub_field('marquee_auto_link', 'options'); ?>" class="two"><?php the_sub_field('marquee_auto', 'options'); ?></a><?php } ?>
+            <?php if (get_sub_field('marquee_info', 'options')) { ?><span class="three"><?php the_sub_field('marquee_info', 'options'); ?></span><?php } ?>
+          </div>
+        <?php endwhile; ?>
       </div>
       <div aria-hidden="true" class="items">
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
-        <div class="item"><span class="one">Предложение дня:</span><span class="two">Ford Bronco Sport</span><span class="three">-9% $130 000</span></div>
+        <?php while ( have_rows('marquee', 'options') ) : the_row(); ?>
+          <div class="item">
+            <span class="one"><?php echo __('Offer of the day:', 'freshauto'); ?></span>
+            <?php if (get_sub_field('marquee_auto', 'options')) { ?><a href="<?php the_sub_field('marquee_auto_link', 'options'); ?>" class="two"><?php the_sub_field('marquee_auto', 'options'); ?></a><?php } ?>
+            <?php if (get_sub_field('marquee_info', 'options')) { ?><span class="three"><?php the_sub_field('marquee_info', 'options'); ?></span><?php } ?>
+          </div>
+        <?php endwhile; ?>
       </div>
     </div>
   </div>
+  <?php else : endif; ?>
+
   <div class="container">
     <div class="header__container">
       <a href="<?php echo get_home_url(); ?>" class="logo">

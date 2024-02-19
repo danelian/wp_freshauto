@@ -14,13 +14,14 @@ $a_unit = get_field('a_unit');
 $a_state = get_field('a_state');
 $a_equipment = get_field('a_equipment');
 // Price
+$a_old_price_before = get_field('a_old_price_before');
 $a_old_price = get_field('a_old_price');
+$a_new_price_before = get_field('a_new_price_before');
 $a_new_price = get_field('a_new_price');
 // Text info
 $a_info = get_field('a_info');
 // We recomend
-$a_recomend = get_field('a_recomend');
-$a_recomend_post = get_sub_field('a_recomend_post')
+$a_recomend_posts = get_field('a_recomend_posts')
 ?>
 
 <div class="product">
@@ -28,80 +29,36 @@ $a_recomend_post = get_sub_field('a_recomend_post')
     <div class="product__container">
       <div class="product__slider">
         <!-- Swiper -->
+        <?php if ( $a_gallery ): ?>
         <div class="swiper productMainSwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-            </div>
+            <?php foreach( $a_gallery as $image ): ?>
+              <div class="swiper-slide">
+                <a href="<?php echo $image['url']; ?>" data-fancybox="gallery">
+                  <img src="<?php echo $image['url']; ?>" alt="image"/>
+                </a>
+              </div>
+            <?php endforeach; ?>
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
           <div class="swiper-pagination"></div>
         </div>
+        <?php endif; ?>
+        <?php if ( $a_gallery ): ?>
         <div class="productSecondSwiper__wrapper">
           <div thumbsSlider="" class="swiper productSecondSwiper">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-              </div>
+              <?php foreach( $a_gallery as $image ): ?>
+                <div class="swiper-slide">
+                  <img src="<?php echo $image['url']; ?>" alt="image">
+                </div>
+              <?php endforeach; ?>
             </div>
             <div class="swiper-pagination"></div>
           </div>
         </div>
+        <?php endif; ?>
       </div>
       <div class="product__content">
         <h1 class="product__title"><?php the_title(); ?></h1>
@@ -117,102 +74,67 @@ $a_recomend_post = get_sub_field('a_recomend_post')
           <?php if ($a_engine) { ?><p class="char"><span><?php echo __('Engine', 'freshauto') ?></span> <?php echo $a_engine; ?></p><?php } ?>
         </div>
         <div class="product__price">
-          <?php if ($a_old_price) { ?><div class="old"><?php echo $a_old_price; ?></div><?php } ?>
-          <?php if ($a_new_price) { ?><div class="new"><?php echo $a_new_price; ?></div><?php } ?>
+          <?php if ($a_old_price) { ?><div class="old"><?php if ($a_old_price_before) { ?><span><?php echo $a_old_price_before; ?></span><?php } ?> $<?php echo $a_old_price; ?></div><?php } ?>
+          <?php if ($a_new_price) { ?><div class="new"><?php if ($a_new_price_before) { ?><span><?php echo $a_new_price_before; ?></span><?php } ?> $<?php echo $a_new_price; ?></div><?php } ?>
         </div>
         <div class="product__nav">
-          <a href="#" class="button-primary">Заказать</a>
-          <a href="#" class="button-third">Проверить</a>
+          <a href="#" class="button-primary to-state" data-state="order"><?php echo __('Order', 'freshauto'); ?></a>
         </div>
       </div>
     </div>
     <?php if ($a_info) { ?><div class="product__about"><?php echo $a_info; ?></div><?php } ?>
+    <?php if ($a_recomend_posts) { ?>
     <div class="product__recom">
       <div class="heading">
         <h2 class="section-title"><?php echo __('We recomend', 'freshauto'); ?></h2>
       </div>
       <div class="latesta__cards">
-        <div class="acard">
-          <!-- Swiper -->
-          <div class="swiper acardSwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-          <a href="single.html" class="acard__content">
-            <h2 class="acard__title">Ford Bronco Sport</h2>
-            <div class="acard__price">
-              <div class="old">$160 000</div>
-              <div class="new">$130 000</div>
-            </div>
-            <div class="acard__chars">
-              <p>157 129 км</p>
-              <p>Автомат</p>
-              <p>1.6/128 л.с.</p>
-              <p>Передний привод</p>
-            </div>
-          </a>
-        </div>
-        <div class="acard">
-          <!-- Swiper -->
-          <div class="swiper acardSwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-          <a href="single.html" class="acard__content">
-            <h2 class="acard__title">Ford Bronco Sport</h2>
-            <div class="acard__price">
-              <div class="old">$160 000</div>
-              <div class="new">$130 000</div>
-            </div>
-            <div class="acard__chars">
-              <p>157 129 км</p>
-              <p>Автомат</p>
-              <p>1.6/128 л.с.</p>
-              <p>Передний привод</p>
-            </div>
-          </a>
-        </div>
-        <div class="acard">
-          <!-- Swiper -->
-          <div class="swiper acardSwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="/img/auto.jpg" alt=""></div>
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-          <a href="single.html" class="acard__content">
-            <h2 class="acard__title">Ford Bronco Sport</h2>
-            <div class="acard__price">
-              <div class="old">$160 000</div>
-              <div class="new">$130 000</div>
-            </div>
-            <div class="acard__chars">
-              <p>157 129 км</p>
-              <p>Автомат</p>
-              <p>1.6/128 л.с.</p>
-              <p>Передний привод</p>
-            </div>
-          </a>
-        </div>
+        <?php foreach( $a_recomend_posts as $post ): ?>
+          <?php get_template_part('template-parts/acard'); ?>
+        <?php endforeach; ?>
       </div>
     </div>
+    <?php } ?>
   </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var productTitle = document.querySelector('.product__title');
+      var orderNameField = document.getElementById('order-name');
+      if (productTitle && orderNameField) {
+        orderNameField.value = productTitle.innerText;
+      }
+  });
+</script>
+
+<div class="state" data-state="order">
+	<div class="state-box">
+		<div class="close">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    </div>
+    <div class="modal-heading">
+      <?php if (get_field('orderform_title', 'options')) { ?><h2><?php the_field('orderform_title', 'options'); ?></h2><?php } ?>
+      <?php if (get_field('orderform_text', 'options')) { ?><p><?php the_field('orderform_text', 'options'); ?></p><?php } ?>
+    </div>
+    <?php
+    if (defined('ICL_LANGUAGE_CODE')) {
+        $current_language = ICL_LANGUAGE_CODE;
+        
+        if ($current_language == 'en') {
+            echo do_shortcode('[contact-form-7 id="cf82f33" title="Order form"]');
+        } elseif ($current_language == 'ru') {
+            echo do_shortcode('[contact-form-7 id="2603b65" title="Форма заказа"]');
+        }
+    } else {
+        // Если плагин WPML не активирован, выводим форму по умолчанию
+        echo do_shortcode('[contact-form-7 id="cf82f33" title="Order form"]');
+    }
+    ?>
+	</div>
 </div>
 
 <?php get_footer(); ?>

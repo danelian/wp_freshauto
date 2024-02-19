@@ -8,6 +8,7 @@ require_once(__DIR__ . '/includes/wp_breadcrumbs.php');
  */
 if (!function_exists('freshauto_setup')) {
   function freshauto_setup() {
+    // Подключение файла переводов
     load_theme_textdomain( 'freshauto', get_template_directory() . '/languages' );
     // Добавляем динамический <title>
     add_theme_support('title-tag');
@@ -39,6 +40,10 @@ function freshauto_scripts() {
   wp_enqueue_style('select2', get_template_directory_uri() . '/assets/css/select2.min.css');
   // Swiper
   wp_enqueue_style('swiper', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css');
+  // Brazzers Carousel
+  wp_enqueue_style('brazzers-carousel', get_template_directory_uri() . '/assets/css/brazzers-carousel.css');
+  // Fancybox
+  wp_enqueue_style('fancybox', get_template_directory_uri() . '/assets/css/fancybox.css');
   // App style
   wp_enqueue_style('app', get_template_directory_uri() . '/assets/css/style.min.css');
 
@@ -51,8 +56,23 @@ function freshauto_scripts() {
   wp_enqueue_script('select2', get_template_directory_uri() . '/assets/js/select2.min.js', array('jquery'), null, true);
   // Swiper
   wp_enqueue_script('swiper', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array('jquery'), null, true);
+  // Brazzers Carousel
+  wp_enqueue_script('brazzers-carousel', get_template_directory_uri() . '/assets/js/brazzers-carousel.js', array('jquery'), null, true);
+  // Fancybox
+  wp_enqueue_script('fancybox', get_template_directory_uri() . '/assets/js/fancybox.js', array('jquery', 'swiper'), null, true);
   // App js
   wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array('jquery', 'select2', 'swiper'), null, true);
+
+
+  $mydata = [
+		'select_search' => __('Search...', 'freshauto'),
+		'select_nofound' => __('No results found', 'freshauto'),
+		'select_brand_placeholder' => __('Brand', 'freshauto'),
+		'select_model_placeholder' => __('Model', 'freshauto'),
+		'select_orderby_placeholder' => __('Select the order', 'freshauto'),
+	];
+	
+	wp_add_inline_script( 'app', 'const myScriptData = ' . wp_json_encode( $mydata ), 'before' );
 }
 add_action('wp_enqueue_scripts', 'freshauto_scripts');
 
@@ -139,6 +159,21 @@ function register_post_types(){
 
 }
 
+
+/**
+ * СОЗДАНИЕ OPTIONS PAGE
+ */
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme settings',
+		'menu_title'	=> 'Theme settings',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+}
+
+
 /**
  * SHOW MORE FOR BLOG
  */
@@ -218,59 +253,238 @@ function catalog_load_posts_by_ajax_callback() {
 }
 
 
-//
-
-function search_posts() {
-  $a_brand = $_POST['a_brand'];
-  // $price = $_POST['price'];
-  
-  $args = array(
-    'post_type' => 'post',
-    'posts_per_page' => -1,
-    'meta_query' => array(
-      'relation' => 'AND',
-      array(
-        'key' => 'a_brand',
-        'value' => $a_brand,
-        'compare' => '=',
-      ),
-      // array(
-      //   'key' => 'price',
-      //   'value' => $price,
-      //   'compare' => '<=',
-      //   'type' => 'NUMERIC',
-      // ),
-    ),
-  );
-  
-  $query = new WP_Query($args);
-  
-  // Обработка результатов и возврат JSON
-  $results = array();
-  if ($query->have_posts()) {
-    while ($query->have_posts()) {
-      $query->the_post();
-      $results[] = array(
-        'title' => get_the_title(),
-        'permalink' => get_permalink(),
-        // Другие поля поста, которые вам нужны
-      );
-    }
-  }
-  
-  wp_reset_postdata();
-  
-  wp_send_json($results);
-}
-add_action('wp_ajax_search_posts', 'search_posts');
-add_action('wp_ajax_nopriv_search_posts', 'search_posts');
-
-///////////////////////////////
-
 
 
 @ini_set( 'upload_max_size' , '256M' );
 @ini_set( 'post_max_size', '256M');
 @ini_set( 'max_execution_time', '300' );
 
-?>
+/**
+ * 
+ * 
+ * 
+ * 
+ */
+
+add_action( 'wp_ajax_filter_update', 'ajax_filter_update_ajax' ); 
+add_action( 'wp_ajax_nopriv_filter_update', 'ajax_filter_update_ajax' ); 
+ 
+function ajax_filter_update_ajax(){
+
+  /**
+   * 
+   * 
+   * 
+   */ 
+
+
+ 
+  $brand         = $_POST['brand'];
+  $model         = $_POST['model'];
+  $sorting       = $_POST['sort'];
+  $mileage1      = ( $_POST['mileage1'] ) ? $_POST['mileage1'] : '0';
+  $mileage2      = ( $_POST['mileage2'] ) ? $_POST['mileage2'] : '9999999999999999999999';
+  $price1        = ( $_POST['price1'] ) ? $_POST['price1'] : '0';
+  $price2        = ( $_POST['price2'] ) ? $_POST['price2'] : '99999999999999999999999999';
+  $year1         = ( $_POST['year1'] ) ? $_POST['year1'] : '0';
+  $year2         = ( $_POST['year2'] ) ? $_POST['year2'] : '999999';
+
+  /**
+   * 
+   * 
+   * 
+   */
+
+  if ( $brand !== 'default') :
+
+    $brand_arr = array (
+        'key'         =>  'a_brand',
+        'value'       =>  $brand,
+        'compare'     =>  'LIKE',
+    );
+
+  else :
+
+    $brand_array = array();
+
+  endif;
+
+  if ( $model !== 'default') :
+
+    $model_arr = array (
+        'key'         =>  'a_model',
+        'value'       =>  $model,
+        'compare'     =>  'LIKE',
+    );
+
+  else :
+
+    $model_array = array();
+
+  endif;
+
+  /**
+   * 
+   * 
+   * 
+   */
+
+
+
+  /**
+   * 
+   * 
+   * 
+   */   
+  
+  $meta_query = array (
+    'relation'      => 'AND',
+    $brand_arr,
+    $model_arr,
+    array (
+      'key'         => 'a_mileage',
+      'value'       => $mileage1,
+      'compare'     => '>=',
+      'type'        => 'numeric'
+    ),
+    array (
+      'key'         => 'a_mileage',
+      'value'       => $mileage2,
+      'compare'     => '<=',
+      'type'        => 'numeric'
+    ),
+    array (
+      'key'         => 'a_new_price',
+      'value'       => $price1,
+      'compare'     => '>=',
+      'type'        => 'numeric'
+    ),
+    array (
+      'key'         => 'a_old_price',
+      'value'       => $price2,
+      'compare'     => '<=',
+      'type'        => 'numeric'
+    ),
+    array (
+      'key'         => 'a_model_year',
+      'value'       => $year1,
+      'compare'     => '>=',
+      'type'        => 'numeric'
+    ),
+    array (
+      'key'         => 'a_model_year',
+      'value'       => $year2,
+      'compare'     => '<=',
+      'type'        => 'numeric'
+    ),
+  ); 
+
+  /**
+   * 
+   * 
+   * 
+   */ 
+
+  if ( $sorting == 'orderby1') {
+
+     $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'meta_key'        => 'a_new_price',
+      'orderby'         => 'meta_value_num', 
+      'posts_per_page'  => '-1',
+      'order'           => 'ASC',
+      'meta_query'      => $meta_query
+    );
+
+  } elseif ( $sorting == 'orderby2') {
+
+    $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'meta_key'        => 'a_new_price',
+      'orderby'         => 'meta_value_num', 
+      'posts_per_page'  => '-1',
+      'order'           => 'DESC',
+      'meta_query'      => $meta_query
+    );
+
+  } elseif ( $sorting == 'orderby5') {
+
+    $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'meta_key'        => 'a_mileage',
+      'orderby'         => 'meta_value_num', 
+      'posts_per_page'  => '-1',
+      'order'           => 'ASC',
+      'meta_query'      => $meta_query
+    );
+
+  } elseif ( $sorting == 'orderby3') {
+
+    $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'orderby'         => 'date', 
+      'posts_per_page'  => '-1',
+      'order'           => 'ASC',
+      'meta_query'      => $meta_query
+    );
+
+  } elseif ( $sorting == 'orderby4') {
+
+    $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'orderby'         => 'date', 
+      'posts_per_page'  => '-1',
+      'order'           => 'DESC',
+      'meta_query'      => $meta_query
+    );
+
+  } else {
+
+    $wargs = array(
+      'post_type'       => 'post',
+      'post_status'     => 'publish',
+      'meta_key'        => 'a_mileage',
+      'posts_per_page'  => '-1',
+      'meta_query'      => $meta_query
+    );
+
+  }
+
+  
+
+  $wquery = new WP_Query( $wargs );
+
+  $i = 1;
+
+  if ( $wquery->have_posts() ) :
+
+  while ( $wquery->have_posts() ) : $wquery->the_post();
+
+    get_template_part('template-parts/acard', '', array( 'increment' => $i ));
+
+  $i++; 
+
+  endwhile;
+
+  else :
+    
+    echo 'No Posts';
+
+  endif; 
+
+  wp_reset_postdata(); 
+
+
+  /**
+   * 
+   * 
+   * 
+   */ 
+ 
+  die; 
+}  

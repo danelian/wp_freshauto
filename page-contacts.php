@@ -84,7 +84,20 @@ get_header(); ?>
       </div>
       <div class="contacts-section__form">
         <h2><?php echo __('Write to our operator', 'freshauto'); ?></h2>
-        <?php echo do_shortcode('[contact-form-7 id="402e66d" title="Contact form"]'); ?>
+        <?php
+        if (defined('ICL_LANGUAGE_CODE')) {
+            $current_language = ICL_LANGUAGE_CODE;
+            
+            if ($current_language == 'en') {
+                echo do_shortcode('[contact-form-7 id="402e66d" title="Contact form"]');
+            } elseif ($current_language == 'ru') {
+                echo do_shortcode('[contact-form-7 id="1e3e846" title="Форма обратной связи"]');
+            }
+        } else {
+            // Если плагин WPML не активирован, выводим форму по умолчанию
+            echo do_shortcode('[contact-form-7 id="402e66d" title="Contact form"]');
+        }
+        ?>
       </div>
     </div>
   </div>

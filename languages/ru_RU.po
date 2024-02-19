@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: freshauto\n"
-"POT-Creation-Date: 2024-02-11 18:56+0400\n"
+"POT-Creation-Date: 2024-02-19 16:16+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Danelian\n"
@@ -31,15 +31,15 @@ msgstr "не существует"
 msgid "To main"
 msgstr "На главную"
 
-#: archive-articles.php:6
+#: archive-articles.php:10
 msgid "Articles"
 msgstr "Статьи"
 
-#: archive-articles.php:7
+#: archive-articles.php:11
 msgid "Here you can find our news and offers"
 msgstr "Здесь вы можете ознакомится с нашими новостями и предложениями"
 
-#: archive-articles.php:30 index.php:91
+#: archive-articles.php:34 index.php:171
 msgid "Show more"
 msgstr "Показать ещё"
 
@@ -47,41 +47,102 @@ msgstr "Показать ещё"
 msgid "© 2023 — Copyright"
 msgstr "© 2023 — Copyright"
 
-#: front-page.php:30
+#: front-page.php:81 front-page.php:130
 msgid "Search"
 msgstr "Поиск"
 
-#: front-page.php:31
+#: front-page.php:82
 msgid "for now"
 msgstr "на данный момент"
 
-#: front-page.php:31
+#: front-page.php:82
 msgid "unique offers"
 msgstr "уникальных предложений"
 
-#: front-page.php:117
+#: front-page.php:115 index.php:124
+msgid "Mileage from, km"
+msgstr "Пробег от, км"
+
+#: front-page.php:116 front-page.php:121 front-page.php:126 index.php:125
+#: index.php:129 index.php:133
+msgid "to"
+msgstr "до"
+
+#: front-page.php:120 index.php:128
+msgid "Price from, ₽"
+msgstr "Цена от, ₽"
+
+#: front-page.php:125 index.php:132
+msgid "A year from"
+msgstr "Год от"
+
+#: front-page.php:139
 msgid "Latest arrivals"
 msgstr "Последние поступления"
 
-#: header.php:18
+#: functions.php:68
+msgid "Search..."
+msgstr "Поиск…"
+
+#: functions.php:69
+msgid "No results found"
+msgstr "Результатов не найдено"
+
+#: functions.php:70
+msgid "Brand"
+msgstr "Марка"
+
+#: functions.php:71
+msgid "Model"
+msgstr "Модель"
+
+#: functions.php:72
+msgid "Select the order"
+msgstr "Выберите очередность"
+
+#: header.php:23 header.php:32
 msgid "Offer of the day:"
 msgstr "Предложение дня:"
 
-#: index.php:6
+#: index.php:72
 msgid "Catalog"
 msgstr "Каталог"
 
-#: index.php:11
+#: index.php:77
 msgid "Filter"
 msgstr "Фильтр"
 
-#: index.php:55
+#: index.php:86 index.php:108
+msgid "Select"
+msgstr "Выбрать"
+
+#: index.php:135
 msgid "Reset"
 msgstr "Сбросить"
 
-#: index.php:61
+#: index.php:141
 msgid "All models"
 msgstr "Все модели"
+
+#: index.php:144
+msgid "Inexpensive first"
+msgstr "Сначала недорогие"
+
+#: index.php:145
+msgid "Dear ones first"
+msgstr "Сначала дорогие"
+
+#: index.php:146
+msgid "New ones first"
+msgstr "Сначала новые"
+
+#: index.php:147
+msgid "Old ones first"
+msgstr "Сначала старые"
+
+#: index.php:148
+msgid "Low mileage"
+msgstr "Маленький пробег"
 
 #: page-contacts.php:13
 msgid "Write to our operator and we will be happy to give advice!"
@@ -103,42 +164,46 @@ msgstr "Адрес"
 msgid "Write to our operator"
 msgstr "Написать нашему оператору"
 
-#: single.php:109
+#: single.php:66
 msgid "Status"
 msgstr "Статус"
 
-#: single.php:110
+#: single.php:67
 msgid "Drive unit"
 msgstr "Привод"
 
-#: single.php:111
+#: single.php:68
 msgid "Model year"
 msgstr "Модельный год"
 
-#: single.php:112
+#: single.php:69
 msgid "State"
 msgstr "Состояние"
 
-#: single.php:113
+#: single.php:70
 msgid "Mileage"
 msgstr "Mileage"
 
-#: single.php:114
+#: single.php:71
 msgid "Equipment"
 msgstr "Комплектация"
 
-#: single.php:115
+#: single.php:72
 msgid "Country of export"
 msgstr "Страна экспорта"
 
-#: single.php:116
+#: single.php:73
 msgid "Color"
 msgstr "Цвет"
 
-#: single.php:117
+#: single.php:74
 msgid "Engine"
 msgstr "Двигатель"
 
-#: single.php:132
+#: single.php:81
+msgid "Order"
+msgstr ""
+
+#: single.php:89
 msgid "We recomend"
 msgstr "Рекомендуем"

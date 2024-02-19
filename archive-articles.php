@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php 
+/*
+Template Name: Articles
+*/
+get_header(); ?>
 
 <section class="archive-articles">
   <div class="container">

@@ -1819,6 +1819,7 @@ input[type=number]::-webkit-inner-spin-button {
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
+  position: relative;
 }
 .latesta__cards .acard {
   width: calc(33.33% - 14px);
@@ -3801,4 +3802,28 @@ input[type=number]::-webkit-inner-spin-button {
   .product__about {
     padding: 20px;
   }
+}
+
+/**
+ * 
+ * 
+ * 
+ */
+
+.latesta__cards {
+  position: relative;
+}
+
+.hover.latesta-cards:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(208 210 222 / 85%);
+    z-index: 100;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
 }
