@@ -140,9 +140,10 @@ get_header(); ?>
     </div>
     <?php $latest_posts = get_field('latest_posts'); if ($latest_posts) { ?>
       <div class="latesta__cards" id="latesta-cards">
+        <?php $my_args = ['my_count' => 1]; ?>
         <?php foreach( $latest_posts as $post ): ?>
-          <?php get_template_part('template-parts/acard'); ?>
-        <?php endforeach; ?>
+          <?php get_template_part('template-parts/acard', null, $my_args); ?>
+        <?php /* вот здесь нужно обновить переменную на +1 */ endforeach; ?>
       </div>
     <?php } ?>
   </div>

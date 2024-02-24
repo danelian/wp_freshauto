@@ -24,6 +24,28 @@ $a_info = get_field('a_info');
 $a_recomend_posts = get_field('a_recomend_posts')
 ?>
 
+<script>
+  function formatNumber(number) {
+    var str = String(number).replace(/\s/g, '');
+    var formattedStr = '';
+    for (var i = str.length - 1; i >= 0; i--) {
+      formattedStr = str[i] + formattedStr;
+      if ((str.length - i) % 3 === 0 && i !== 0) {
+        formattedStr = ' ' + formattedStr;
+      }
+    }
+    return formattedStr;
+  }
+
+  var a_old_price = <?php echo $a_old_price; ?>;
+  var formatted_a_old_price = formatNumber(a_old_price);
+  var a_new_price = <?php echo $a_new_price; ?>;
+  var formatted_a_new_price = formatNumber(a_new_price);
+  var a_mileage = <?php echo $a_mileage; ?>;
+  var formatted_a_mileage = formatNumber(a_mileage);
+</script>
+
+
 <div class="product">
   <div class="container">
     <div class="product__container">
@@ -67,15 +89,27 @@ $a_recomend_posts = get_field('a_recomend_posts')
           <?php if ($a_unit) { ?><p class="char"><span><?php echo __('Drive unit', 'freshauto'); ?></span> <?php echo $a_unit; ?></p><?php } ?>
           <?php if ($a_model_year) { ?><p class="char"><span><?php echo __('Model year', 'freshauto'); ?></span> <?php echo $a_model_year; ?></p><?php } ?>
           <?php if ($a_state) { ?><p class="char"><span><?php echo __('State', 'freshauto'); ?></span> <?php echo $a_state; ?></p><?php } ?>
-          <?php if ($a_mileage) { ?><p class="char"><span><?php echo __('Mileage', 'freshauto'); ?></span> <?php echo $a_mileage; ?></p><?php } ?>
+          <?php if ($a_mileage) { ?><p class="char"><span><?php echo __('Mileage', 'freshauto'); ?></span> <span id="single-mileage"></span> <?php echo __('km', 'freshauto'); ?></p><?php } ?>
           <?php if ($a_equipment) { ?><p class="char"><span><?php echo __('Equipment', 'freshauto'); ?></span> <?php echo $a_equipment; ?></p><?php } ?>
           <?php if ($a_country) { ?><p class="char"><span><?php echo __('Country of export', 'freshauto'); ?></span> <?php echo $a_country; ?></p><?php } ?>
           <?php if ($a_color) { ?><p class="char"><span><?php echo __('Color', 'freshauto'); ?></span> <?php echo $a_color; ?></p><?php } ?>
           <?php if ($a_engine) { ?><p class="char"><span><?php echo __('Engine', 'freshauto') ?></span> <?php echo $a_engine; ?></p><?php } ?>
         </div>
         <div class="product__price">
-          <?php if ($a_old_price) { ?><div class="old"><?php if ($a_old_price_before) { ?><span><?php echo $a_old_price_before; ?></span><?php } ?> $<?php echo $a_old_price; ?></div><?php } ?>
-          <?php if ($a_new_price) { ?><div class="new"><?php if ($a_new_price_before) { ?><span><?php echo $a_new_price_before; ?></span><?php } ?> $<?php echo $a_new_price; ?></div><?php } ?>
+          <?php if ($a_old_price) { ?>
+            <div class="old">
+              <?php if ($a_old_price_before) { ?>
+                <span><?php echo $a_old_price_before; ?></span>
+              <?php } ?> $<span id="single-old-price"></span>
+            </div>
+          <?php } ?>
+          <?php if ($a_new_price) { ?>
+            <div class="new">
+              <?php if ($a_new_price_before) { ?>
+                <span><?php echo $a_new_price_before; ?></span>
+              <?php } ?> $<span id="single-new-price"></span>
+            </div>
+          <?php } ?>
         </div>
         <div class="product__nav">
           <a href="#" class="button-primary to-state" data-state="order"><?php echo __('Order', 'freshauto'); ?></a>
@@ -100,11 +134,15 @@ $a_recomend_posts = get_field('a_recomend_posts')
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-      var productTitle = document.querySelector('.product__title');
-      var orderNameField = document.getElementById('order-name');
-      if (productTitle && orderNameField) {
-        orderNameField.value = productTitle.innerText;
-      }
+    var productTitle = document.querySelector('.product__title');
+    var orderNameField = document.getElementById('order-name');
+    if (productTitle && orderNameField) {
+      orderNameField.value = productTitle.innerText;
+    }
+    
+    document.getElementById('single-old-price').textContent = formatted_a_old_price;
+    document.getElementById('single-new-price').textContent = formatted_a_new_price;
+    document.getElementById('single-mileage').textContent = formatted_a_mileage;
   });
 </script>
 

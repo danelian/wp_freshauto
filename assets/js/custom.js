@@ -1,8 +1,6 @@
 var page = 2
 jQuery(function ($) {
 
-  ajax_filter_update( $(this) );
-  
   $('body').on('click', '#loadmore-blog', function () {
     var data = {
       action: 'load_posts_by_ajax',
@@ -19,6 +17,8 @@ jQuery(function ($) {
       }
     })
   })
+
+  ajax_filter_update( $(this) );
 
   $('#global-filter-section select').on('change', function(){
 
@@ -48,7 +48,19 @@ jQuery(function ($) {
 
   })
 
+  $('#loadmore-blog').on('click', function(){
+
+      $('#loadmore-blog').hide();
+      $('.acard.acard_type_hidden').removeClass('acard_type_hidden');
+
+      return false;
+
+  })
+
   $('#button_reset_form').on('click', function(){
+
+      $('#select-marka').val(null).trigger('change');
+      $('#select-model').val(null).trigger('change');
 
       $('#global-filter-section input').each( function( index ) {
 
@@ -79,14 +91,6 @@ jQuery(function ($) {
 
 function ajax_filter_update( elem ) {
 
-  /**
-   * 
-   * elem_id  = elem.attr('id');
-     elem_val = elem.val();
-     console.log( elem_val );
-   * 
-   */
-
   url_site  = $('#global-filter-section').data('url');
   
   brand     = document.getElementById("select-marka");
@@ -98,20 +102,8 @@ function ajax_filter_update( elem ) {
   year1     = document.getElementById("year-from");
   year2     = document.getElementById("year-to");
   sort      = document.getElementById("select-orderby");
-  /*console.log( brand.value );
-  console.log( model.value );
-  console.log( mileage1.value );
-  console.log( mileage2.value );
-  console.log( price1.value );
-  console.log( price2.value );
-  console.log( year1.value );
-  console.log( year2.value );*/
 
-   /**
-    * 
-    * 
-    * 
-    */ 
+  if ( brand.value || model.value ) {
 
   $.ajax({
 
@@ -122,16 +114,61 @@ function ajax_filter_update( elem ) {
       beforeSend: function( xhr ) {
 
         $('#latesta-cards').addClass('hover');
+        $('#catalog-filter-model option').attr('style', 'display: none; ');
+        $('#select-model option').attr('style', 'display: none; ');
 
       },
 
       success: function( data ) {
 
+        $('#catalog-filter-model').attr('style', 'display: block; ');
+        $('#catalog-filter-model option').attr('style', 'display: none; ');
+
         $('#latesta-cards').removeClass('hover');
         $('#latesta-cards').html(data);
+
+
+        if ( $('#latesta-cards .acard').length > 12)
+           $('#loadmore-blog').show();
+        else
+           $('#loadmore-blog').hide();
+
+        if (window.innerWidth > 1024) {
+          $(".acard__thumb").brazzersCarousel();
+        }
+
+        if (window.innerWidth <= 1024) {
+          if ($('.acardSwiper').length > 0) { //some-slider-wrap-in
+            let swiperInstances = [];
+            $(".acardSwiper").each(function (index, element) { //some-slider-wrap-in
+              const $this = $(this);
+              $this.addClass("instance-" + index); //instance need to be unique (ex: some-slider)
+              $this.parent().find(".swiper-pagination").addClass("pagination-" + index);
+              swiperInstances[index] = new Swiper(".instance-" + index, { //instance need to be unique (ex: some-slider)
+                spaceBetween: 10,
+                pagination: {
+                  el: '.pagination-' + index,
+                  clickable: true
+                },
+              });
+            });
+        
+            // Now you can call the update on a specific instance in the "swiperInstances" object
+            // e.g.
+            swiperInstances[3].update();
+            //or all of them
+            setTimeout(function () {
+              for (const slider of swiperInstances) {
+                slider.update();
+              }
+            }, 50);
+          }
+        }
 
       }
 
     });
+
+  } 
 
 }

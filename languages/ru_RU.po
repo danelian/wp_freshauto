@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: freshauto\n"
-"POT-Creation-Date: 2024-02-19 16:16+0400\n"
+"POT-Creation-Date: 2024-02-24 20:09+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Danelian\n"
@@ -39,7 +39,7 @@ msgstr "Статьи"
 msgid "Here you can find our news and offers"
 msgstr "Здесь вы можете ознакомится с нашими новостями и предложениями"
 
-#: archive-articles.php:34 index.php:171
+#: archive-articles.php:34 index.php:175
 msgid "Show more"
 msgstr "Показать ещё"
 
@@ -59,20 +59,20 @@ msgstr "на данный момент"
 msgid "unique offers"
 msgstr "уникальных предложений"
 
-#: front-page.php:115 index.php:124
+#: front-page.php:115 index.php:127
 msgid "Mileage from, km"
 msgstr "Пробег от, км"
 
-#: front-page.php:116 front-page.php:121 front-page.php:126 index.php:125
-#: index.php:129 index.php:133
+#: front-page.php:116 front-page.php:121 front-page.php:126 index.php:128
+#: index.php:132 index.php:136
 msgid "to"
 msgstr "до"
 
-#: front-page.php:120 index.php:128
+#: front-page.php:120 index.php:131
 msgid "Price from, ₽"
 msgstr "Цена от, ₽"
 
-#: front-page.php:125 index.php:132
+#: front-page.php:125 index.php:135
 msgid "A year from"
 msgstr "Год от"
 
@@ -104,43 +104,43 @@ msgstr "Выберите очередность"
 msgid "Offer of the day:"
 msgstr "Предложение дня:"
 
-#: index.php:72
+#: index.php:75
 msgid "Catalog"
 msgstr "Каталог"
 
-#: index.php:77
+#: index.php:80
 msgid "Filter"
 msgstr "Фильтр"
 
-#: index.php:86 index.php:108
+#: index.php:90 index.php:107
 msgid "Select"
 msgstr "Выбрать"
 
-#: index.php:135
+#: index.php:138
 msgid "Reset"
 msgstr "Сбросить"
 
-#: index.php:141
+#: index.php:144
 msgid "All models"
 msgstr "Все модели"
 
-#: index.php:144
+#: index.php:147
 msgid "Inexpensive first"
 msgstr "Сначала недорогие"
 
-#: index.php:145
+#: index.php:148
 msgid "Dear ones first"
 msgstr "Сначала дорогие"
 
-#: index.php:146
+#: index.php:149
 msgid "New ones first"
 msgstr "Сначала новые"
 
-#: index.php:147
+#: index.php:150
 msgid "Old ones first"
 msgstr "Сначала старые"
 
-#: index.php:148
+#: index.php:151
 msgid "Low mileage"
 msgstr "Маленький пробег"
 
@@ -164,46 +164,50 @@ msgstr "Адрес"
 msgid "Write to our operator"
 msgstr "Написать нашему оператору"
 
-#: single.php:66
+#: single.php:88
 msgid "Status"
 msgstr "Статус"
 
-#: single.php:67
+#: single.php:89
 msgid "Drive unit"
 msgstr "Привод"
 
-#: single.php:68
+#: single.php:90
 msgid "Model year"
 msgstr "Модельный год"
 
-#: single.php:69
+#: single.php:91
 msgid "State"
 msgstr "Состояние"
 
-#: single.php:70
+#: single.php:92
 msgid "Mileage"
 msgstr "Mileage"
 
-#: single.php:71
+#: single.php:92
+msgid "km"
+msgstr "км"
+
+#: single.php:93
 msgid "Equipment"
 msgstr "Комплектация"
 
-#: single.php:72
+#: single.php:94
 msgid "Country of export"
 msgstr "Страна экспорта"
 
-#: single.php:73
+#: single.php:95
 msgid "Color"
 msgstr "Цвет"
 
-#: single.php:74
+#: single.php:96
 msgid "Engine"
 msgstr "Двигатель"
 
-#: single.php:81
+#: single.php:115
 msgid "Order"
-msgstr ""
+msgstr "Заказать"
 
-#: single.php:89
+#: single.php:123
 msgid "We recomend"
 msgstr "Рекомендуем"

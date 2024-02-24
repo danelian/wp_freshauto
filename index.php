@@ -10,23 +10,27 @@ $brands_list      = [];
 $model_list       = []; 
 
 $args = array(
-    'post_type'         => 'post'
+    'post_type'         => 'post',
+    'posts_per_page'    => 12
 );
 
 $the_query = new WP_Query( $args );
 
 if( $the_query->have_posts() ):
 
-  while( $the_query->have_posts() ) : $the_query->the_post();
+    while( $the_query->have_posts() ) : $the_query->the_post();
 
-    if ( get_field('a_brand') ) :
+        $b =  get_field('a_brand');
+        $m =  get_field('a_model');
 
-      $brands_list[]    = get_field('a_brand');
-      $model_list[]     = get_field('a_model');
+        if ( get_field('a_brand') ) :
 
-    endif; 
+          $brands_list[ ]          = $b;
+          $model_list[ $b ][ $m ]  = $m;
 
-  endwhile;
+        endif; 
+
+    endwhile;
 
 endif;
 
@@ -39,7 +43,6 @@ wp_reset_query();
  */ 
 
 $brands_list     = array_unique( $brands_list );
-$model_list      = array_unique( $model_list );
 
 /**
  * 
@@ -83,24 +86,20 @@ get_header(); ?>
               <select id="select-marka" class="js-select2">
 
                 <option></option>
+
                 <option value="default"><?php echo __('Select', 'freshauto'); ?></option>
 
-                <?php 
-                foreach ( $brands_list as $brand ) : 
-                $selected = ( $brand_start == $brand ) ? 'selected' : ''; 
-                ?>
+                <?php foreach ( $brands_list as $brand ) :?>
 
                 <option value="<?= $brand; ?>" <?= $selected; ?>><?= $brand; ?></option>  
 
-                <?php 
-                endforeach; 
-                ?>
+                <?php endforeach; ?>
 
               </select>
 
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="catalog-filter-model">
 
               <select id="select-model" class="js-select2">
 
@@ -108,13 +107,17 @@ get_header(); ?>
                 <option value="default"><?php echo __('Select', 'freshauto'); ?></option>
 
                 <?php 
-                  foreach ( $model_list as $model ) : 
-                  $selected = ( $model_start == $model ) ? 'selected' : ''; 
+                  foreach ( $model_list as $key => $model ) :
+                  foreach ( $model as $item ) :  
+                  $selected = ( $model_start == $item ) ? 'selected' : ''; 
                 ?>
 
-                <option value="<?= $model; ?>" <?= $selected; ?>><?= $model; ?></option>
+                <option style="display: none; " data-model="<?= $key; ?>" value="<?= $item; ?>" <?= $selected; ?>><?= $item; ?></option>
 
-                <?php endforeach; ?>
+                <?php 
+                  endforeach; 
+                  endforeach;
+                ?>
 
               </select>
 
@@ -160,17 +163,18 @@ get_header(); ?>
         ?>
         <?php if ($catalog_posts->have_posts()): ?>
           <div class="catalog__cards catalog-posts latesta-cards" id="latesta-cards">
+            <?php $my_args = ['my_count' => 1]; ?>
             <?php while ($catalog_posts->have_posts()):
               $catalog_posts->the_post(); ?>
-              <?php get_template_part('template-parts/acard'); ?>
-            <?php endwhile; ?>
+              <?php get_template_part('template-parts/acard', null, $my_args); ?>
+            <?php /* вот здесь нужно обновить переменную на +1 */ endwhile; ?>
             <?php wp_reset_postdata(); ?>
           </div>
-          <!--div class="pagination__wrapper">
-            <div class="button-second" id="loadmore-catalog">
+          <div class="pagination__wrapper">
+            <a href="#" class="button-second" id="loadmore-blog">
               <?php echo __('Show more', 'freshauto'); ?>
-            </div>
-          </div-->
+            </a>
+          </div>
         <?php endif; ?>
       </div>
     </div>
